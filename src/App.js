@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Nav2 from "./components/nav";
+import ShannonApiCall from "./requests/shannon-api-call";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import NbaRequest from "./requests/nba-request";
+import Request from "./requests/request";
+import MlbRequest from "./requests/MlbRequest";
+import NhlRequest from "./requests/NhlRequest";
+import NhlStandings from "./components/nhl/NhlStandings";
+import NhlTeams from "./components/nhl/NhlTeams";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Nav2/>
+          <Switch>
+            <Route exact path="/" component={ ShannonApiCall }/>
+            <Route path="/nba" component={ NbaRequest }/>
+            <Route path="/cfb" component={ Request }/>
+            <Route path="/mlb" component={ MlbRequest }/>
+            <Route path="/nhl" component={ NhlRequest }/>
+            <Route path="/standings" component={ NhlStandings }/>
+            <Route path="/teams" component={ NhlTeams }/>
+          </Switch>
+      </div>
+    </Router>
   );
 }
 
